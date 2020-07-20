@@ -1,5 +1,7 @@
 package app.security;
 
+import app.models.User;
+import app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,14 +21,14 @@ public class AuthProviderImpl implements AuthenticationProvider {
 
 
     @Autowired
-    PersonsRepository personsRepository;
+    UserRepository userRepository;
 
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String login = authentication.getName();
-        Persons persons = personsRepository.getLogin(login);
+        User persons = userRepository.getLogin(login);
         String password = authentication.getCredentials().toString();
         PasswordCoder passwordCoder = null;
         try {

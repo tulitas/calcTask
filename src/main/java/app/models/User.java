@@ -18,6 +18,17 @@ public class User implements java.io.Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "logs")
+    private String logs;
+
+    public String getLogs() {
+        return logs;
+    }
+
+    public void setLogs(String logs) {
+        this.logs = logs;
+    }
+
     public long getId() {
         return id;
     }
@@ -48,6 +59,7 @@ public class User implements java.io.Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", logs='" + logs + '\'' +
                 '}';
     }
 }

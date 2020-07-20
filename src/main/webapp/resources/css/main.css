@@ -1,0 +1,29 @@
+.mainButtons {
+
+    background-color: #4CAF50;
+    border-radius: 7px;
+    color: #cccccc;
+    outline: none;
+    padding: 50px;
+    font-size: 20px;
+
+}
+
+button:hover {
+
+    background-color: #275d8e;
+}
+
+button:active {
+
+
+    background-color: #36728e;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#buttonBox {
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
