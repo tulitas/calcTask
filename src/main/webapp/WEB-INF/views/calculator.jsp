@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns:th="http://www.thymeleaf.org">
 <%--
   Created by IntelliJ IDEA.
@@ -64,7 +65,7 @@
 <!-- create table -->
 <body>
 <div class=title>Web Calculator</div>
-<form action="${pageContext.request.contextPath}/calculator" method="post">
+<form action="${pageContext.request.contextPath}/options/calculator" method="get">
     <table border="1">
 
         <tr>
@@ -103,15 +104,28 @@
 
     </table>
 </form>
+<%--<form action="${pageContext.request.contextPath}/options/save" method="get">--%>
 
 <label title="log" class="display">
-
 <textarea class="scrollabletextbox" name="note">
 
     ${list}
 </textarea>
 
+
+
+
 </label>
+
+<form action="${pageContext.request.contextPath}logs/save" method="post">
+    <label>
+        <input  name="logs" value="${list}"/>
+    </label>
+    <label>for save enter name
+        <input name="name"/>
+    </label> >
+<button onclick="location.href='/logs/save'">save</button>
+</form>
 
 </body>
 </html>

@@ -21,4 +21,6 @@ public interface UserService {
     String getLogin(String login);
 
     String getLoginName(String login);
+
+    void calculate();
 }

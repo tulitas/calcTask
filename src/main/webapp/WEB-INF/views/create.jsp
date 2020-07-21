@@ -63,7 +63,7 @@
             <tr>
                 <td width="75">${personToPopUp.id}</td>
 
-                <td width="50">${personToPopUp.name}</td>
+                <td width="50">${personToPopUp.login}</td>
 
 
             </tr>

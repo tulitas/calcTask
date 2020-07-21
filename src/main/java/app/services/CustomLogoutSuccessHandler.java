@@ -20,7 +20,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         Object principal = authentication.getPrincipal();
         if (principal instanceof User) {
             User user = (User) principal;
-            if( user.getName().equals("user") ){
+            if( user.getLogin().equals("user") ){
                 response.sendRedirect( request.getContextPath() + "/logout/user" );
             }
         }

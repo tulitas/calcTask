@@ -42,8 +42,8 @@ Registration form
 <div>
     <form action="${pageContext.request.contextPath}options/create" method="post">
 
-        <label for="name">Login</label>
-        <input type="text" name="name" id="name"><br>
+        <label for="login">Login</label>
+        <input type="text" name="login" id="login"><br>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password"><br>
@@ -54,8 +54,7 @@ Registration form
         <%--<label for="logs">Age</label>--%>
         <%--<input type="text" name="logs" id="logs"><br>--%>
 
-        <%--<label for="current_date_time_block">Time set automatically</label>--%>
-        <%--<textarea hidden name="regDate" id="current_date_time_block"></textarea>--%>
+        <textarea  name="regDate" id="current_date_time_block"></textarea>
         <p>
             <button class="add_button">Add</button>
         </p>

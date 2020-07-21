@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.getLoginName(login);
     }
 
+    @Override
+    public void calculate() {
+
+    }
+
 }

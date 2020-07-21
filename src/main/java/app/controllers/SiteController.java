@@ -29,7 +29,7 @@ public class SiteController {
 
     @RequestMapping("/edit")
     public ModelAndView edit() {
-        return new ModelAndView("edit");
+        return new ModelAndView("save");
     }
 
     @RequestMapping("/welcome")

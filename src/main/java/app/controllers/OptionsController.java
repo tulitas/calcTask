@@ -1,33 +1,38 @@
 package app.controllers;
 
 import app.models.User;
+import app.repository.LogsRepository;
 import app.repository.UserRepository;
 import app.security.PasswordCoder;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
+import app.services.LogsService;
 import app.services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/")
@@ -36,6 +41,9 @@ public class OptionsController {
     //    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
+    private List<String> list = new ArrayList<String>();
+    private LogsController logsController;
+
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -76,7 +84,14 @@ public class OptionsController {
         return "personsList";
     }
 
-
+    //    @RequestMapping(value = "options/personsListLog")
+//    public String getLogForSave(Model model) throws InterruptedException {
+//        List<User> personsForms = userService.getAll();
+//        model.addAttribute("personsList", personsForms);
+//        System.out.println(personsForms);
+//        setData(String.valueOf(model));
+//        return "calculator";
+//    }
     @GetMapping(value = "options/csv")
     public String exportToCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
@@ -107,7 +122,7 @@ public class OptionsController {
                 String[] data = line.split(",");
                 User user = new User();
                 user.setId(Long.parseLong(data[0]));
-                user.setName(data[1]);
+                user.setLogin(data[1]);
                 user.setPassword(data[2]);
                 user.setLogs(data[3]);
                 userService.addPersons(user);
@@ -118,17 +133,54 @@ public class OptionsController {
 
     }
 
+    @RequestMapping(value = "options/calculator", method = RequestMethod.GET)
+    public String calculator(HttpServletRequest request, Model model, String solve) {
+
+
+//        userService.calculate();
+        System.out.println("run");
+//         solve = request.getParameter("solve");
+        System.out.println(solve);
+        String answer = null;
+        String deal = null;
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("JavaScript");
+        try {
+            System.out.println(engine.eval(solve));
+            answer = String.valueOf(engine.eval(solve));
+            deal = (solve + " = " + answer);
+            list.add(deal);
+            System.out.println(list);
+        } catch (
+                ScriptException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("deal", deal);
+        request.setAttribute("answer", answer);
+        request.setAttribute("list", list);
+
+//
+        System.out.println("deal = " + deal + "\n" + "answer = " + answer + "\n"
+                + "list = " + list);
+        model.addAttribute("answer", answer);
+        model.addAttribute("list", list);
+        List<User> personsForms = userService.getAll();
+        model.addAttribute("personsList", personsForms);
+        return "calculator";
+    }
+
+
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
     public String removeJobform(@PathVariable("id") long id) {
         userService.removeJobForm(id);
-        return "redirect:personsList";
+        return "personsList";
     }
 
     @RequestMapping(value = "/options/edit{id}", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Optional<User> personsList = userService.findById(id);
         model.addAttribute("personToEdit", personsList);
-        return "edit";
+        return "save";
     }
 
     @RequestMapping(value = "/options/edit{id}", method = RequestMethod.POST)
@@ -143,6 +195,7 @@ public class OptionsController {
         return "personsList";
 
     }
+
 
     public String getData() {
         return data;
