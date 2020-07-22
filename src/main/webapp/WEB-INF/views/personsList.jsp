@@ -78,38 +78,12 @@
         }
     }
 
-    function sortTableByAge() {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("myTable");
-        switching = true;
-        while (switching) {
-            switching = false;
-            rows = table.rows;
 
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[3];
-                y = rows[i + 1].getElementsByTagName("TD")[3];
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
 </script>
 <sec:authorize access="isAuthenticated()">
     <button onclick="sortTableByLogin()">Sort by login</button>
     <button onclick="sortTableByLoginByName()">Sort by name</button>
     <button onclick="sortTableByAge()">Sort by age</button>
-    <button onclick="location.href='/palindrom'">Palindrom</button>
-    <button onclick="location.href='/numberToStringX'">Number To String</button>
     <table id="myTable">
         <tr>
             <th>ID</th>

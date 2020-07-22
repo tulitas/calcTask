@@ -79,19 +79,11 @@ public class OptionsController {
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
         List<User> personsForms = userService.getAll();
-        System.out.println(personsForms);
         model.addAttribute("personsList", personsForms);
         return "personsList";
     }
 
-    //    @RequestMapping(value = "options/personsListLog")
-//    public String getLogForSave(Model model) throws InterruptedException {
-//        List<User> personsForms = userService.getAll();
-//        model.addAttribute("personsList", personsForms);
-//        System.out.println(personsForms);
-//        setData(String.valueOf(model));
-//        return "calculator";
-//    }
+
     @GetMapping(value = "options/csv")
     public String exportToCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");

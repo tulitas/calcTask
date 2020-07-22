@@ -58,5 +58,10 @@ public class SiteController {
     public ModelAndView calculator() {
         return new ModelAndView("calculator");
     }
+
+    @RequestMapping(value = "/logsList")
+    public ModelAndView logsList() {
+        return new ModelAndView("LogsList");
+    }
 }
 

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/")
@@ -39,6 +41,14 @@ public class LogsController {
         return "savedLog";
     }
 
+    @RequestMapping(value = "/logs/findLog", method = RequestMethod.GET)
+    public String findLog(String name, Model model) {
+       List<Logs> log1 =  logsService.findLog(name);
+        model.addAttribute("findLog", log1);
+        System.out.println(model);
+        return "logsList";
+
+    }
     public String getLog() {
         return log;
     }

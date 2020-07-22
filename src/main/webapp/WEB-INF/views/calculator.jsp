@@ -117,8 +117,18 @@
     <label>for save enter name
         <input name="name"/>
     </label> >
-<button onclick="location.href='/logs/save'">save</button>
+<button type="submit">save</button>
 </a:form>
+
+<a:form action="${pageContext.request.contextPath}logs/findLog" method="get">
+
+    <label>for find log enter name
+        <input name="name"/>
+    </label> >
+    <button type="submit">find</button>
+</a:form>
+<button onclick="location.href='/'">Main page</button><br>
+
 
 
 

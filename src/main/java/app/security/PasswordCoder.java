@@ -20,11 +20,6 @@ public class PasswordCoder {
             hashtext = no.toString(16);
             hashedPassword = md.digest(password.getBytes(UTF_8));
 
-            System.out.println("hash text from login page " + hashtext);
-
-
-
-
         }
 
         catch (NoSuchAlgorithmException e) {

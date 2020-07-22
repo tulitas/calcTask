@@ -21,6 +21,7 @@ ${savedLog.toString()}
 
 
 <a href="<c:url value="/logout"/>">Logout</a>
+<button onclick="location.href='/'">Main page</button>
 
 </body>
 </sec:authorize>

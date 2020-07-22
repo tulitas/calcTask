@@ -12,7 +12,6 @@
     <button onclick="location.href='/'">Main page</button>
     <button onclick="location.href='/logout'">Logout</button>
     <button onclick="location.href='/calculator'">Calculator</button>
-
 </sec:authorize>
 
 </body>
