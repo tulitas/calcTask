@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="a" uri="http://www.springframework.org/tags/form" %>
 <html xmlns:th="http://www.thymeleaf.org">
 <%--
   Created by IntelliJ IDEA.
@@ -10,20 +11,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="<c:url value="/resources/css/calculator.css"/>" rel="stylesheet">
+    <%--<link href="<c:url value="/resources/JS/calculator.js"/>" rel="stylesheet">--%>
     <script>
-        // function that display value
         function dis(val) {
             document.getElementById("result").value += val
         }
 
-        // //function that evaluates the digit and return result
-        // function solve() {
-        //     let x = document.getElementById("result").value
-        //     let y = eval(x)
-        //     document.getElementById("result").value = y
-        // }
 
-        //function that clear the display
         function clr() {
             document.getElementById("result").value = ""
         }
@@ -112,20 +107,20 @@
     ${list}
 </textarea>
 
-
-
-
 </label>
+<br>
 
-<form action="${pageContext.request.contextPath}logs/save" method="post">
+<a:form action="${pageContext.request.contextPath}/logs/save" method="post">
     <label>
-        <input  name="logs" value="${list}"/>
+        <input hidden name="log" value="${list}"/>
     </label>
     <label>for save enter name
         <input name="name"/>
     </label> >
 <button onclick="location.href='/logs/save'">save</button>
-</form>
+</a:form>
+
+
 
 </body>
 </html>

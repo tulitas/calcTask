@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -18,7 +17,7 @@ public class LogsController {
 
     private LogsService logsService;
     private String log;
-    private String  logForSave;
+    private String logForSave;
     @Autowired
     LogsRepository logsRepository;
 
@@ -31,18 +30,12 @@ public class LogsController {
 
     }
 
-//    @RequestMapping(value = "/logs/getLog", method = RequestMethod.GET)
-//    public String getLogForSave(Model model) {
-//        model.addAttribute("logToSave", getLogForSave());
-//        System.out.println(model);
-//        return "save";
-//    }
 
     @RequestMapping(value = "/logs/save", method = RequestMethod.POST)
-    public String saveLog(Logs logs, Model model) {
+    public String saveLog(Logs logs, Model model, String log) {
+        logs.setLog(log);
         logsService.saveLog(logs);
         model.addAttribute("savedLog", logs);
-        System.out.println(model);
         return "savedLog";
     }
 

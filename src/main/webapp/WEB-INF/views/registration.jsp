@@ -48,11 +48,6 @@ Registration form
         <label for="password">Password</label>
         <input type="password" name="password" id="password"><br>
 
-        <%--<label for="name">Name</label>--%>
-        <%--<input type="text" name="name" id="name"><br>--%>
-
-        <%--<label for="logs">Age</label>--%>
-        <%--<input type="text" name="logs" id="logs"><br>--%>
 
         <textarea  name="regDate" id="current_date_time_block"></textarea>
         <p>

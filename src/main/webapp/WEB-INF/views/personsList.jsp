@@ -114,7 +114,6 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Log</th>
             <th colspan="2">Action</th>
 
 
@@ -126,7 +125,6 @@
                 <td width="75">${personsForm.id}</td>
 
                 <td width="50">${personsForm.login}</td>
-                <td width="50">${personsForm.logs}</td>
                 <td width="50"><a href="/options/delete${personsForm.id}">Delete</a></td>
                 <td width="50"><a class="delete" href="/options/edit${personsForm.id}">Edit</a></td>
             </tr>

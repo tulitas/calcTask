@@ -79,8 +79,8 @@ public class OptionsController {
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
         List<User> personsForms = userService.getAll();
+        System.out.println(personsForms);
         model.addAttribute("personsList", personsForms);
-        setData(String.valueOf(model));
         return "personsList";
     }
 
@@ -138,19 +138,15 @@ public class OptionsController {
 
 
 //        userService.calculate();
-        System.out.println("run");
 //         solve = request.getParameter("solve");
-        System.out.println(solve);
         String answer = null;
         String deal = null;
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");
         try {
-            System.out.println(engine.eval(solve));
             answer = String.valueOf(engine.eval(solve));
             deal = (solve + " = " + answer);
             list.add(deal);
-            System.out.println(list);
         } catch (
                 ScriptException e) {
             e.printStackTrace();
@@ -160,8 +156,6 @@ public class OptionsController {
         request.setAttribute("list", list);
 
 //
-        System.out.println("deal = " + deal + "\n" + "answer = " + answer + "\n"
-                + "list = " + list);
         model.addAttribute("answer", answer);
         model.addAttribute("list", list);
         List<User> personsForms = userService.getAll();

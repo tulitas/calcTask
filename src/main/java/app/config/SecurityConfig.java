@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("login")
-                .defaultSuccessUrl("/welcome")
+                .defaultSuccessUrl("/")
                 .and().logout();
     }
 

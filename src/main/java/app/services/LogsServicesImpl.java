@@ -23,7 +23,7 @@ public class LogsServicesImpl implements LogsService {
     @Transactional
     @Override
     public void saveLog(Logs logs) {
-        System.out.println("saved");
+
         logsRepository.save(logs);
     }
 

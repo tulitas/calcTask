@@ -7,8 +7,12 @@
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
-<a href="${pageContext.request.contextPath}/calculator">Calculator</a>
-    <a href="<c:url value="/logout"/>">Logout</a>
+
+    <button onclick="location.href='/options/personsList'">Users List</button>
+    <button onclick="location.href='/'">Main page</button>
+    <button onclick="location.href='/logout'">Logout</button>
+    <button onclick="location.href='/calculator'">Calculator</button>
+
 </sec:authorize>
 
 </body>

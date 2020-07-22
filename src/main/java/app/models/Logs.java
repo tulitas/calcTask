@@ -15,8 +15,8 @@ public class Logs implements java.io.Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "logs")
-    private String logs;
+    @Column(name = "log")
+    private String log;
 
     public long getId() {
         return id;
@@ -34,12 +34,12 @@ public class Logs implements java.io.Serializable {
         this.name = name;
     }
 
-    public String getLogs() {
-        return logs;
+    public String getLog() {
+        return log;
     }
 
-    public void setLogs(String logs) {
-        this.logs = logs;
+    public void setLog(String log) {
+        this.log = log;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Logs implements java.io.Serializable {
         return "Logs{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", logs='" + logs + '\'' +
+                ", log='" + log + '\'' +
                 '}';
     }
 }
