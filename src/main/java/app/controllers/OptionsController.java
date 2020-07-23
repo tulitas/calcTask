@@ -39,7 +39,7 @@ public class OptionsController {
     //    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
-    private List<String> list = new ArrayList<String>();
+    public List<String> list = new ArrayList<String>();
     private LogsController logsController;
 
     @PersistenceContext
@@ -50,6 +50,10 @@ public class OptionsController {
     @Autowired
     public OptionsController(UserService userService) {
         this.userService = userService;
+    }
+
+    public OptionsController() {
+        list.clear();
     }
 
 

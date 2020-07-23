@@ -34,12 +34,14 @@ public class LogsController {
 
 
     @RequestMapping(value = "/logs/save", method = RequestMethod.POST)
-    public String saveLog(Logs logs, Model model, String log) {
+    public String saveLog(Logs logs, Model model,String name,  String log) {
+
         logs.setLog(log);
         logsService.saveLog(logs);
 
         model.addAttribute("savedLog", logs);
-        System.out.println(model);
+        OptionsController optionsController = new OptionsController();
+        optionsController.list.clear();
         return "savedLog";
     }
 
@@ -47,7 +49,7 @@ public class LogsController {
     public String findLog(String name, Model model) {
        List<Logs> log1 =  logsService.findLog(name);
         model.addAttribute("findLog", log1);
-        System.out.println(model);
+
         return "logsList";
 
     }

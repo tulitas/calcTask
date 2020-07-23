@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="a" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html xmlns:th="http://www.thymeleaf.org">
 <%--
   Created by IntelliJ IDEA.
@@ -59,6 +60,7 @@
 </head>
 <!-- create table -->
 <body>
+<sec:authorize access="isAuthenticated()">
 <div class=title>Web Calculator</div>
 <form action="${pageContext.request.contextPath}/options/calculator" method="get">
     <table border="1">
@@ -130,7 +132,7 @@
 <button onclick="location.href='/'">Main page</button><br>
 
 
-
+</sec:authorize>
 
 </body>
 </html>

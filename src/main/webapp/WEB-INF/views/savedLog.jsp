@@ -12,9 +12,10 @@
 <head>
     <title>hi</title>
 </head>
+
 <sec:authorize access="isAuthenticated()">
 <body>
-
+your log is saved<br>
 ${savedLog.name}
 ${savedLog.log}
 
