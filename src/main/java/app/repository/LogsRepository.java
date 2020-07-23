@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LogsRepository  extends CrudRepository<Logs, Long> {
 
-    @Query(value = "SELECT log from logs where name=:name", nativeQuery = true)
+    @Query(value = "SELECT * from logs where name=:name", nativeQuery = true)
     List<Logs> findLog(String name);
 }

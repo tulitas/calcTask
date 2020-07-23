@@ -20,17 +20,15 @@ public class LogsServicesImpl implements LogsService {
         this.logsRepository = logsRepository;
     }
 
-
     @Transactional
     @Override
     public void saveLog(Logs logs) {
-
         logsRepository.save(logs);
     }
 
     @Override
     public List<Logs> findLog(String name) {
-        System.out.println("impl " + name);
+        System.out.println(name);
         return logsRepository.findLog(name);
     }
 

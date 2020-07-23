@@ -43,6 +43,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
         }
 
         Object x = persons.getPassword();
+        assert passwordCoder != null;
         Object y = passwordCoder.getHashtext();
 
         if (x.equals(y)) {

@@ -17,7 +17,6 @@
 
 ${savedLog.name}
 ${savedLog.log}
-${savedLog.toString()}
 
 
 <a href="<c:url value="/logout"/>">Logout</a>

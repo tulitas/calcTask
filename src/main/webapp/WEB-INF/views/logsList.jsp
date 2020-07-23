@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="a" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: SergejK
@@ -15,6 +16,7 @@
     <title>Logs List</title>
 </head>
 <body>
+<sec:authorize access="isAuthenticated()">
 <table id="myTable">
     <tr>
         <th>Name</th>
@@ -32,5 +34,13 @@
         </tr>
     </c:forEach>
 </table>
+<div>
+    Current Time :<%= new java.util.Date() %><br>
+</div>
+<button onclick="location.href='/options/personsList'">Users List</button>
+<button onclick="location.href='/'">Main page</button>
+<button onclick="location.href='/logout'">Logout</button>
+<button onclick="location.href='/calculator'">Calculator</button>
+</sec:authorize>
 </body>
 </html>

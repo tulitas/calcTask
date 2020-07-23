@@ -1,12 +1,10 @@
 package app.controllers;
 
 import app.models.User;
-import app.repository.LogsRepository;
 import app.repository.UserRepository;
 import app.security.PasswordCoder;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
-import app.services.LogsService;
 import app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +67,7 @@ public class OptionsController {
         } else {
             PasswordCoder passwordCoder = new PasswordCoder(password);
             user.setPassword(String.valueOf(passwordCoder.getHashtext() + " " + passwordCoder.getHashedPassword()));
-            userService.addPersons(user);
+            userService.addUser(user);
             model.addAttribute("personToPopUp", user);
 //            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
             return "create";
@@ -95,8 +93,8 @@ public class OptionsController {
 
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
-        String[] csvHeader = {"User Id", "Login", "log"};
-        String[] nameMaping = {"id", "name", "logs"};
+        String[] csvHeader = {"User Id", "Login"};
+        String[] nameMaping = {"id", "name"};
 
         csvBeanWriter.writeHeader(csvHeader);
         for (User user : personsList) {
@@ -116,8 +114,7 @@ public class OptionsController {
                 user.setId(Long.parseLong(data[0]));
                 user.setLogin(data[1]);
                 user.setPassword(data[2]);
-                user.setLogs(data[3]);
-                userService.addPersons(user);
+                userService.addUser(user);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,7 +156,7 @@ public class OptionsController {
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
     public String removeJobform(@PathVariable("id") long id) {
         userService.removeJobForm(id);
-        return "personsList";
+        return "redirect:personsList";
     }
 
     @RequestMapping(value = "/options/edit{id}", method = RequestMethod.GET)
@@ -176,7 +173,7 @@ public class OptionsController {
             user.setId(id);
             return "registration";
         }
-        userService.addPersons(user);
+        userService.addUser(user);
         model.addAttribute("persons", userService.getAll());
         return "personsList";
 

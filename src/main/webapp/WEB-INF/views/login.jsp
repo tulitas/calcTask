@@ -86,7 +86,7 @@
 <%--<form action="/?" method="post">--%>
 
 
-<form name="login" action="${pageContext.request.contextPath}/login/process" method='POST' >
+<form name="login" action="${pageContext.request.contextPath}login/process" method='POST' >
     <table>
         <tr>
             <td>Login:</td>

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    void addPersons(User user);
+    void addUser(User user);
 
     List<User> getAll();
 

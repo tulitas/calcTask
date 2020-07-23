@@ -49,7 +49,6 @@ Registration form
         <input type="password" name="password" id="password"><br>
 
 
-        <textarea  name="regDate" id="current_date_time_block"></textarea>
         <p>
             <button class="add_button">Add</button>
         </p>

@@ -37,7 +37,9 @@ public class LogsController {
     public String saveLog(Logs logs, Model model, String log) {
         logs.setLog(log);
         logsService.saveLog(logs);
+
         model.addAttribute("savedLog", logs);
+        System.out.println(model);
         return "savedLog";
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 
-@Table(name = "persons", catalog = "persons")
+@Table(name = "user")
 
 public class User implements java.io.Serializable {
     @Id
@@ -18,16 +18,8 @@ public class User implements java.io.Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "logs")
-    private String logs;
 
-    public String getLogs() {
-        return logs;
-    }
 
-    public void setLogs(String logs) {
-        this.logs = logs;
-    }
 
     public long getId() {
         return id;
@@ -59,7 +51,7 @@ public class User implements java.io.Serializable {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", logs='" + logs + '\'' +
+                ", logs='"  + '\'' +
                 '}';
     }
 }
