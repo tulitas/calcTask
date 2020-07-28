@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +31,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
         User persons = userRepository.getLogin(login);
         passwordFromDb = persons.getPassword();
         String password = authentication.getCredentials().toString();
-        PasswordCoder passwordCoder = null;
-        try {
-            passwordCoder = new PasswordCoder(password);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+
 
 
         if (persons == null) {

@@ -6,6 +6,8 @@ import app.security.PasswordCoder;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import app.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ import java.util.Optional;
 @RequestMapping("/")
 public class OptionsController {
     private UserService userService;
-    //    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
+    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
     public List<String> list = new ArrayList<String>();
@@ -75,15 +77,16 @@ public class OptionsController {
             user.setPassword(encoder.encode(password));
             userService.addUser(user);
             model.addAttribute("personToPopUp", user);
-//            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
+            logger.info("User with login " + user.getLogin() + " and ID " + user.getId() + " " + "Was Created");
             return "create";
         }
     }
 
     @RequestMapping(value = "options/personsList")
-    public String getAll(Model model) throws InterruptedException {
+    public String getAll(Model model, User user) throws InterruptedException {
         List<User> personsForms = userService.getAll();
         model.addAttribute("personsList", personsForms);
+        logger.info("USer " + user.getLogin() + " opened user list");
         return "personsList";
     }
 
@@ -100,7 +103,7 @@ public class OptionsController {
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
         String[] csvHeader = {"User Id", "Login"};
-        String[] nameMaping = {"id", "name"};
+        String[] nameMaping = {"id", "login"};
 
         csvBeanWriter.writeHeader(csvHeader);
         for (User user : personsList) {
@@ -155,6 +158,8 @@ public class OptionsController {
         model.addAttribute("list", list);
         List<User> personsForms = userService.getAll();
         model.addAttribute("personsList", personsForms);
+
+
         return "calculator";
     }
 
