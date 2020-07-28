@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +19,7 @@ import java.util.List;
 @Component
 public class AuthProviderImpl implements AuthenticationProvider {
 
-
+    private String passwordFromDb;
 
     @Autowired
     UserRepository userRepository;
@@ -29,6 +30,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
 
         String login = authentication.getName();
         User persons = userRepository.getLogin(login);
+        passwordFromDb = persons.getPassword();
         String password = authentication.getCredentials().toString();
         PasswordCoder passwordCoder = null;
         try {
@@ -42,15 +44,12 @@ public class AuthProviderImpl implements AuthenticationProvider {
             throw new UsernameNotFoundException("User not found");
         }
 
-        Object x = persons.getPassword();
-        assert passwordCoder != null;
-        Object y = passwordCoder.getHashtext();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!passwordEncoder.matches(password, passwordFromDb )) {
 
-        if (x.equals(y)) {
-            System.out.println("login");
+            throw new UsernameNotFoundException("User or password not found");
 
         }
-
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 

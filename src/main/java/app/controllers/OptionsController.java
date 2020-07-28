@@ -7,6 +7,7 @@ import app.security.PasswordCoder;
 //import org.slf4j.LoggerFactory;
 import app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,7 @@ public class OptionsController {
     private String line = "";
     public List<String> list = new ArrayList<String>();
     private LogsController logsController;
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PersistenceContext
     private EntityManager em;
@@ -70,7 +72,7 @@ public class OptionsController {
             return "error";
         } else {
             PasswordCoder passwordCoder = new PasswordCoder(password);
-            user.setPassword(String.valueOf(passwordCoder.getHashtext() + " " + passwordCoder.getHashedPassword()));
+            user.setPassword(encoder.encode(password));
             userService.addUser(user);
             model.addAttribute("personToPopUp", user);
 //            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
